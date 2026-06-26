@@ -1,0 +1,25 @@
+name: Cuncurrency
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    concurrency: 
+      group: deploy
+      cancel-in-progress: true
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7.0.0
+      - name: Install Dependencies
+        run: npm install
+      - name: React App Build
+        run: npm run build
+      - name: Deploye App
+        run: echo "App is deployee on server"
+        
+        
